@@ -5,15 +5,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="card">
-    <h2>Review Your Details</h2>
 
-    <p id="output"></p>
+<div class="card">
+  <h2>Review Your Details</h2>
+  <p id="output"></p>
 
-    <button onclick="submitForm()">Confirm & Submit</button>
-    <button onclick="window.history.back()">Edit Details</button>
-  </div>
+  <button type="button" onclick="submitForm()">Confirm & Submit</button>
+  <button type="button" onclick="window.history.back()">Edit Details</button>
+</div>
 
-  <script src="script.js"></script>
+<script>
+const data = JSON.parse(localStorage.getItem("application"));
+if (data) {
+  document.getElementById("output").innerHTML =
+    `Name: ${data.name}<br>
+     Email: ${data.email}<br>
+     Mobile: ${data.mobile}<br>
+     Course: ${data.course}`;
+}
+
+function submitForm() {
+  window.location.href = "success.html";
+}
+</script>
+
 </body>
 </html>
