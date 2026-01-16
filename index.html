@@ -46,6 +46,11 @@ if (exists) {
     window.location.href = "review.html";   // Review page
   }
 }
+   if (userExists) {
+  localStorage.setItem("existingUserName", data.name);
+  window.location.href = "exists.html";
+  return;
+} 
 </script>
 
 </body>
