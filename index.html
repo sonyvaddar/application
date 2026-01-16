@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Online Application</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-  <h1>GITHUB PAGES TEST</h1>
 
-  <button onclick="test()">CLICK ME</button>
+<div class="card">
+  <h2>Online Application</h2>
 
-  <script>
-    function test() {
-      alert("JavaScript is working!");
-    }
-  </script>
+  <input id="name" placeholder="Name">
+  <input id="email" placeholder="Email">
+  <input id="mobile" placeholder="Mobile">
+  <input id="course" placeholder="Course">
+
+  <button type="button" onclick="goReview()">Proceed</button>
+</div>
+
+<script>
+function goReview() {
+  const data = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    mobile: document.getElementById("mobile").value,
+    course: document.getElementById("course").value
+  };
+ if (data.name === "" || data.email === "") {
+    alert("Please fill all details");
+    return;
+  }
+
+  localStorage.setItem("application", JSON.stringify(data));
+  window.location.href = "review.html";
+}
+</script>
+
 </body>
 </html>
