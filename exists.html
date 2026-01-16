@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Application Exists</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div class="exists-card">
-<h2>Application Already Exists</h2>
-<p>This user is already registered.</p>
 
-<button onclick="location.href='index.html'">New Application</button>
-</div>
+<body>
+  <div class="exists-card">
+    <h2>Application Already Exists</h2>
+
+    <p class="exists-msg">
+      User <span id="username"></span> is already registered.
+    </p>
+
+    <button onclick="location.href='index.html'">
+      New Application
+    </button>
+  </div>
+
+  <script>
+    document.getElementById("username").textContent =
+      localStorage.getItem("existingUserName") || "This user";
+  </script>
 </body>
 </html>
