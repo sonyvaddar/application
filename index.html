@@ -1,57 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Online Application</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="card">
+    <h2>Online Application</h2>
 
-<div class="card">
-  <h2>Online Application</h2>
+    <input id="name" type="text" placeholder="Name">
+    <input id="email" type="email" placeholder="Email">
+    <input id="mobile" type="text" placeholder="Mobile">
+    <input id="course" type="text" placeholder="Course">
 
-  <input id="name" placeholder="Name">
-  <input id="email" placeholder="Email">
-  <input id="mobile" placeholder="Mobile">
-  <input id="course" placeholder="Course">
-
-  <button type="button" onclick="goReview()">Proceed</button>
-</div>
+    <button type="button" id="proceedBtn">Proceed</button>
+  </div>
 
   <script>
-  function goReview() {
-  const data = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    mobile: document.getElementById("mobile").value,
-    course: document.getElementById("course").value
-  };
+    // Attach event listener
+    document.getElementById("proceedBtn").addEventListener("click", goReview);
 
-  if (data.name === "" || data.email === "" || data.mobile === "" || data.course === "") {
-    alert("Please fill all details");
-    return;
-  }
+    function goReview() {
+      const data = {
+        name:
+ document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        mobile: document.getElementById("mobile").value.trim(),
+        course: document.getElementById("course").value.trim()
+      };
 
-  // Get existing users from localStorage
-  let users = JSON.parse(localStorage.getItem("users")) || [];
+      // Check if any field is empty
+      if (!data.name || !data.email || !data.mobile || !data.course) {
+        alert("Please fill all details");
+        return;
+      }
 
-  // Check if user already exists
-  let exists = users.find(user =>
-    user.email === data.email || user.mobile === data.mobile
-  );
-if (exists) {
-    window.location.href = "exists.html";   // User already exists page
-  } else {
-    users.push(data);
-    localStorage.setItem("users", JSON.stringify(users));
-    window.location.href = "review.html";   // Review page
-  }
-}
-   if (userExists) {
-  localStorage.setItem("existingUserName", data.name);
-  window.location.href = "exists.html";
-  return;
-} 
-</script>
+      // Get all users from localStorage
+      const users = JSON.parse(localStorage.getItem("users")) || [];
 
+      // Check if user already exists
+      const existingUser = users.find(user =>
+        user.email === data.email || user.mobile === data.mobile
+      );
+if (existingUser) {
+        // Store the existing user's name for display
+        localStorage.setItem("existingUserName", existingUser.name);
+        window.location.href = "exists.html";
+        return;
+      }
+
+      // If new user, store in localStorage
+      users.push(data);
+      localStorage.setItem("users", JSON.stringify(users));
+
+      // Redirect to review page
+      window.location.href = "review.html";
+    }
+  </script>
 </body>
 </html>
